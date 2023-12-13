@@ -34,4 +34,39 @@ function humanGame(){
 	console.println("todo");
 }
 
-menu();
+function initGame() ([]int) {
+	test := [1, 3, 5, 7];
+	return test;
+}
+
+function getMax(l : []int) (int) {
+	max := l[0];
+	for(var i int = 1, i < 4, i++){
+		if (l[i] > max){
+			max = l[i];
+		}
+	}
+
+	return max;
+}
+	
+function printGame(l : []int){
+	rows := 4;
+	var blank int; #will be used to store blank characters
+	max := getMax(l);
+	console.println();
+	for(var i int = 0, i < rows, i++){
+		blank = max - l[i];
+		for(var b int = 0, b < blank, b++){
+			console.print(" ");
+		}
+		for(var n int = 0, n < l[i], n++){
+			console.print("| ");
+		}
+		console.println();
+	}
+}
+
+test := initGame();
+printGame(test);
+#menu();
