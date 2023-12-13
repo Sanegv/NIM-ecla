@@ -31,7 +31,28 @@ function perfectAIGame(){
 }
 
 function humanGame(){
-	console.println("todo");
+	game := initGame();
+	player := 0;
+
+	printGame(game);
+	while(!checkVictory(game)){
+		console.printf("\nJoueur %d :\n", player+1);
+		humanTurn(game);
+		player = !player;
+	}
+
+	console.printf("\nVictoire du joueur %d !\n", player+1);
+}
+
+#TODO replace rows with array.length
+function checkVictory(l : []int) (bool){
+	rows := 4;
+	for(var i int = 0, i < rows, i++){
+		if(l[i] > 0) {
+			return false;
+		}
+	}
+	return true;
 }
 
 function initGame() ([]int) {
@@ -49,7 +70,8 @@ function getMax(l : []int) (int) {
 
 	return max;
 }
-	
+
+#TODO replace rows with array.length
 function printGame(l : []int){
 	rows := 4;
 	var blank int; #will be used to store blank characters
@@ -57,6 +79,7 @@ function printGame(l : []int){
 	console.println();
 	for(var i int = 0, i < rows, i++){
 		blank = max - l[i];
+		console.printf("%d) ", i);
 		for(var b int = 0, b < blank, b++){
 			console.print(" ");
 		}
@@ -65,8 +88,28 @@ function printGame(l : []int){
 		}
 		console.println();
 	}
+	console.println();
 }
 
-test := initGame();
-printGame(test);
+#TODO replace rows with array.length
+function humanTurn(l : []int){
+	line := -1;
+	rows := 4;
+	while(line < 0 || line >= rows){
+		line = cast.atoi(console.input("Sur quelle ligne allez vous prendre des allumettes ?"));
+		if(line < rows){
+			if (l[line] < 1){
+				line = -1;
+			}
+		}
+	}
+	n := 0;
+	while(n < 1 || n > l[line]){
+		n = cast.atoi(console.input("Combien d'allumettes voulez-vous prendre ?"));
+	}
+	l[line] -= n;
+	printGame(game);
+}
+
+humanGame();
 #menu();
