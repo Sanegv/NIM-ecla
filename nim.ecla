@@ -1,0 +1,37 @@
+import "console";
+import "cast";
+
+function menu(){
+	choice := 0;
+	while (choice < 1 || choice > 2) {
+		choice= cast.atoi(console.input("Bienvenue ! Voulez-vous jouer seul (1) ou contre un autre joueur (2) ?"));
+	}
+	if (choice == 2) {
+		humanGame();
+	} else {
+		choice = 0;
+		while (choice < 1 || choice > 2) {
+			choice= cast.atoi(console.input("Voulez-vous jouer contre une IA basique (1) ou contre une IA parfaite (2) ?"));
+		}
+		if(choice == 1) {
+			simpleAIGame();
+		}
+		else {
+			perfectAIGame();
+		}
+	}
+}
+
+function simpleAIGame(){
+	console.println("todo simple AI");
+}
+
+function perfectAIGame(){
+	console.println("todo perfect AI");
+}
+
+function humanGame(){
+	console.println("todo");
+}
+
+menu();
