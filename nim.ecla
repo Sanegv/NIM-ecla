@@ -1,5 +1,6 @@
 import "console";
 import "cast";
+import "math";
 
 function menu(){
 	choice := 0;
@@ -22,8 +23,27 @@ function menu(){
 	}
 }
 
-function simpleAIGame(){
-	console.println("todo simple AI");
+function simpleAIGame(ai : int){
+	game := initGame();
+	player := 0;
+
+	while(!checkVictory(game)){
+		if(player == ai) {
+			console.println("Au tour de l'ordinateur de jouer :");
+			simpleAITurn(game);
+		}
+		else {
+			console.println("A vous de jouer:");
+			humanTurn(game);
+		}
+		player = !player;
+	}
+
+	if(player != ai){
+		console.println("Félicitation ! Vous avez gagné !");
+	} else {
+		console.println("Défaite...");
+	}
 }
 
 function perfectAIGame(){
@@ -111,5 +131,22 @@ function humanTurn(l : []int){
 	printGame(game);
 }
 
-humanGame();
+function simpleAITurn(l : []int){
+	var line int;
+	empty := true; #we cannot pick sticks from an empty line
+	while(empty){
+		line = cast.floatToInt(math.random(0.0, 4.0));
+		if(l[line] > 0){
+			empty = false;
+		}
+	}
+	i := cast.floatToInt(math.random(0.0, cast.intToFloat(l[line]-2)));
+	i++;
+	l[line] -= i;
+	console.printf("L'IA a retiré %d allumettes à la ligne %d\n", i, line);
+	printGame(l);
+}
+
+test := initGame();
+simpleAIGame(0);
 #menu();
